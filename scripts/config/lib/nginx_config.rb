@@ -41,6 +41,7 @@ class NginxConfig
       cleaned_path.chop! if cleaned_path.end_with?("/")
       json["proxies"][loc]["path"] = cleaned_path
       json["proxies"][loc]["header"] = ENV['ADDITIONAL_PROXY_HEADER']
+      json["proxies"][loc]["header_value"] = ENV['ADDITIONAL_PROXY_HEADER_VALUE']
       json["proxies"][loc]["host"] = uri.dup.tap {|u| u.path = '' }.to_s
       %w(http https).each do |scheme|
         json["proxies"][loc]["redirect_#{scheme}"] = uri.dup.tap {|u| u.scheme = scheme }.to_s
